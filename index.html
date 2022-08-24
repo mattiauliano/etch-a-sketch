@@ -5,23 +5,31 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Etch A Sketch</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header class="header">
-        <h1 class="title">Etch A Sketch</h1>
+        <h1 class="title">Let's Sketch</h1>
     </header>
     <div class="container">
         <div id="grid" class="grid"></div>
         <div id="menu" class="menu">
-            <button id="color" class="color btn">Color Mode</button>
-            <button id="rainbow" class="rainbow btn">Rainbow Mode</button>
-            <button id="eraser" class="eraser btn">Eraser</button>
-            <button id="clear" class="clear btn">Clear</button>
-        </div>
-        <div id="suggestions" class="suggestions">
-            <p class="suggestion-text">Do you need inspiration? Try: dog</p>
+            <div class="first-btns">
+                <input id="color-picker" type="color" value="#000000">
+                <button id="color" class="color btn">Color Mode</button>
+                <button id="eraser" class="eraser btn">Eraser</button>
+                <button id="rainbow" class="rainbow btn">Rainbow Mode</button>
+            </div>
+            <div class="last-btns">
+                <form>
+                    <label id="text-grid-size" for="square">Grid size: 60 x 60</label><br>
+                    <input type="range" id="squares-range" name="squares" min="1" max="60">
+                  </form>
+                <button id="grid-lines" class="grid-lines btn">Toggle Grid Lines</button>
+                <button id="clear" class="clear btn">Clear</button>
+            </div>
         </div>
     </div>
-    <script></script>
+    <script href="script.js"></script>
 </body>
 </html>
