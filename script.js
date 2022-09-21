@@ -1,32 +1,35 @@
 const canva = document.querySelector(".grid");
 const input = document.querySelector(".sizes");
 
-// Default grid
+// Default settings
+
+// Default grid dimensions
 canva.style.gridTemplateColumns = `repeat(16, 1fr)`;
 canva.style.gridTemplateRows = `repeat(16, 1fr)`;
 
+// Create multiple cells to fill the default gird area
 for (let i=0; i<256; i++) {
-
-    // For loop to create divs in canva
     let newSquare = document.createElement("div");
+
     canva.appendChild(newSquare);
-    // Class to see divs (border gray)
+    // Show new cells with a gray border
     newSquare.classList.toggle("showSquare");
-    // Create a brush with an eventListener on new divs
+    // Create a "Brush" with an event listener on added cells (change background color)
     newSquare.addEventListener("mouseover", () => {
         newSquare.style.backgroundColor = "black";
     })
-
-    canva.insertAdjacentElement("beforeend", newSquare);
 }
 
+// Call a function to clear the grid by clicking on "Clear" button
 clear();
 
-// Input sizes
+// Make the grid variable by adding an event listener on "Grid Sizes" button
 input.addEventListener("click", () => {
     let sizeString = prompt("Modify grid dimensions:");
+    // Convert in number the string input
     let size = Number(sizeString);
 
+    // Alert to create a range of input selection
     if(size<2 || size>100) {
         alert("Error... Chose a number between 2 and 100!")
     } else {
@@ -36,47 +39,50 @@ input.addEventListener("click", () => {
     }
 })
 
-// Function to create divs on input
-function createDivs(size) {
+// Functions
 
-    // Set a variable grid
+// Create a variable grid based on size entered by the user
+function createDivs(size) {
     canva.style.gridTemplateColumns = `repeat(${size}, 1fr)`;
     canva.style.gridTemplateRows = `repeat(${size}, 1fr)`;
-
+    // Call a function to create variable cells in grid and the "Brush feature"
     createAndBrush(size)
 }
 
-// For loop to create multiple divs
 function createAndBrush(size) {
     let size2 = size*size;
 
     for (let i=0; i<(size2); i++) {
-        
         const newSquare = document.createElement("div");
+
         canva.appendChild(newSquare);
         newSquare.classList.toggle("showSquare");
+        // Brush feature
         newSquare.addEventListener("mouseover", () => {
             newSquare.style.backgroundColor = "black";
         })
-
-        canva.insertAdjacentElement("beforeend", newSquare);
     }
 }
 
-// Remove divs once "Grid Sizes" get clicked
+// Remove older cells to avoid adding them to the new ones (once "Grid Sizes" got clicked)
 function removeDivs() {
-    let divsToRemove = document.querySelectorAll(".showSquare")
-    divsToRemove.forEach(div => {
+    // Selecting cells with class ".showSquare"
+    let squaresToRemove = document.querySelectorAll(".showSquare")
+    // For each cells call remove method
+    squaresToRemove.forEach(div => {
         div.remove();
     })
 }
 
 // Clear button
 function clear() {
+    // Selecting "Clear" button and cells to clear
     const clear = document.querySelector(".clear");
-    const divsToRemove = document.querySelectorAll(".showSquare")
+    const squaresToClear = document.querySelectorAll(".showSquare")
+
+    // For each cells to clear, once "Clear" button get clicked, set background color to white
     clear.addEventListener("click", () => {
-        divsToRemove.forEach(div => {
+        squaresToClear.forEach(div => {
             div.style.backgroundColor = "white";
         })
     })
